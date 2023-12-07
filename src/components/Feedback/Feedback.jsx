@@ -12,7 +12,6 @@ export default class Feedback extends Component {
   handleButtonClick = status => {
     this.setState({ status: this.state[status]++ });
     this.countTotalFeedback();
-    // this.countPositiveFeedbackPercentage();
   };
 
   countTotalFeedback = () => {
