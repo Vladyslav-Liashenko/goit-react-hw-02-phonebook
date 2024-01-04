@@ -18,6 +18,7 @@ feedbackOptions = {
   };
 
   handleButtonClick = status => {
+     console.log(status);
     let sum = this.state[status]++;
     this.setState({ status: sum });
     this.countTotalFeedback();
@@ -50,7 +51,7 @@ feedbackOptions = {
       >
         <FeedbackOptions
           options={this.feedbackOptions}
-          onLeaveFeedback={this.handleButtonClick}
+          handleButtonClick={this.handleButtonClick}
         />
         <Statistics
           good={this.state.good}
