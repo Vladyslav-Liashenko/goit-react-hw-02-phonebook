@@ -2,7 +2,6 @@ import { Statistics } from './Feedback/Statistics';
 import { FeedbackOptions } from './Feedback/FeedbackOptions';
 import { Component } from 'react';
 
-// export const App = () => {
 export default class App extends Component{
   state = {
     good: 0,
@@ -19,7 +18,8 @@ feedbackOptions = {
   };
 
   handleButtonClick = status => {
-    this.setState({ status: this.state[status]++ });
+    let sum = this.state[status]++;
+    this.setState({ status: sum });
     this.countTotalFeedback();
   };
 
@@ -32,10 +32,8 @@ feedbackOptions = {
 
   countPositiveFeedbackPercentage = () => {
     const { good, total } = this.state;
-    const positiveFeedback = (good / total) * 100;
-    this.setState(state => {
-      return { positiveFeedback: (state.good / state.total) * 100 };
-    });
+    const positiveFeedback = (good / total) * 100 || 0;
+    this.setState({ positiveFeedback });
   };
   render() {
     return (
