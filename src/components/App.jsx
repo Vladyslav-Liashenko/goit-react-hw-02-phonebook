@@ -10,7 +10,12 @@ export default class App extends Component {
     bad: 0,
     total: 0,
     positiveFeedback: 0,
+    inputValue: '',
   };
+  
+  stateContact = {
+
+  }
 
   feedbackOptions = {
     good: 'good',
@@ -33,10 +38,17 @@ export default class App extends Component {
 
   countPositiveFeedbackPercentage = () => {
     const { good, total } = this.state;
-    const positiveFeedback = (good / total) * 100 || 0;
+    const positiveFeedback = (good / total) * 100;
     const fixedNumber = positiveFeedback.toFixed(0);
-    this.setState({ positiveFeedback: fixedNumber });
+     this.setState(state => {
+      return { positiveFeedback: fixedNumber };
+    });
   };
+
+  handleInputChange = event => {
+    console.log(event);
+  }
+
   render() {
     return (
       <div
@@ -44,8 +56,6 @@ export default class App extends Component {
           height: '100vh',
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
           fontSize: 40,
           color: '#010101',
         }}
@@ -65,6 +75,9 @@ export default class App extends Component {
         ) : (
           <Notification message="There is no feedback"></Notification>
         )}
+
+
+        <ContactForm></ContactForm>
       </div>
     );
   }
