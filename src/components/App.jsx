@@ -1,8 +1,9 @@
 import { Statistics } from './Feedback/Statistics';
 import { FeedbackOptions } from './Feedback/FeedbackOptions';
 import { Component } from 'react';
+import { Notification } from './Notification';
 
-export default class App extends Component{
+export default class App extends Component {
   state = {
     good: 0,
     neutral: 0,
@@ -11,14 +12,13 @@ export default class App extends Component{
     positiveFeedback: 0,
   };
 
-feedbackOptions = {
+  feedbackOptions = {
     good: 'good',
     bad: 'bad',
     neutral: 'neutral',
   };
 
   handleButtonClick = status => {
-     console.log(status);
     let sum = this.state[status]++;
     this.setState({ status: sum });
     this.countTotalFeedback();
@@ -34,7 +34,8 @@ feedbackOptions = {
   countPositiveFeedbackPercentage = () => {
     const { good, total } = this.state;
     const positiveFeedback = (good / total) * 100 || 0;
-    this.setState({ positiveFeedback });
+    const fixedNumber = positiveFeedback.toFixed(0);
+    this.setState({ positiveFeedback: fixedNumber });
   };
   render() {
     return (
@@ -53,14 +54,18 @@ feedbackOptions = {
           options={this.feedbackOptions}
           handleButtonClick={this.handleButtonClick}
         />
-        <Statistics
-          good={this.state.good}
-          neutral={this.state.neutral}
-          bad={this.state.bad}
-          total={this.state.total}
-          positiveFeedback={this.state.positiveFeedback}
-        />
+        {this.state.positiveFeedback ? (
+          <Statistics
+            good={this.state.good}
+            neutral={this.state.neutral}
+            bad={this.state.bad}
+            total={this.state.total}
+            positiveFeedback={this.state.positiveFeedback}
+          />
+        ) : (
+          <Notification message="There is no feedback"></Notification>
+        )}
       </div>
     );
   }
-};
+}
