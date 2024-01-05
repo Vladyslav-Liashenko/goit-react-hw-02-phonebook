@@ -1,4 +1,3 @@
-
 export const FeedbackOptions = (props) => {
   const option = Object.keys(props.options);
   const handleChange = (e) => {

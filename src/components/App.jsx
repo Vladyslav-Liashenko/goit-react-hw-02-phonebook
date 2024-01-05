@@ -2,6 +2,7 @@ import { Statistics } from './Feedback/Statistics';
 import { FeedbackOptions } from './Feedback/FeedbackOptions';
 import { Component } from 'react';
 import { Notification } from './Notification';
+import { ContactForm } from './Contacts/ContactForm';
 
 export default class App extends Component {
   state = {
@@ -10,12 +11,13 @@ export default class App extends Component {
     bad: 0,
     total: 0,
     positiveFeedback: 0,
-    inputValue: '',
   };
-  
-  stateContact = {
+  //   state = {
+  //   contacts: [],
+  //   name: '',
+  // };
 
-  }
+  stateContact = {};
 
   feedbackOptions = {
     good: 'good',
@@ -40,14 +42,14 @@ export default class App extends Component {
     const { good, total } = this.state;
     const positiveFeedback = (good / total) * 100;
     const fixedNumber = positiveFeedback.toFixed(0);
-     this.setState(state => {
+    this.setState(state => {
       return { positiveFeedback: fixedNumber };
     });
   };
 
   handleInputChange = event => {
     console.log(event);
-  }
+  };
 
   render() {
     return (
@@ -75,7 +77,6 @@ export default class App extends Component {
         ) : (
           <Notification message="There is no feedback"></Notification>
         )}
-
 
         <ContactForm></ContactForm>
       </div>
